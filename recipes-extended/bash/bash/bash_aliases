@@ -1,4 +1,0 @@
-alias ll="ls -al"
-alias m=more
-alias md=mkdir
-alias rd=rmdir
