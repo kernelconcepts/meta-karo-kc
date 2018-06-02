@@ -1,8 +1,3 @@
-TCMODE = "${@ 'default' if d.getVar('UBOOT_MACHINE') == None else 'uboot'}"
-
-KBUILD_BUILD_USER := "support"
-KBUILD_BUILD_HOST := "karo-electronics.de"
-
 # Set specific make target and binary suffix
 PREFERRED_PROVIDER_u-boot ??= "u-boot-karo"
 PREFERRED_PROVIDER_virtual/bootloader ??= "u-boot-karo"
@@ -23,8 +18,6 @@ XSERVER_DRIVER_mx6 = "xf86-video-modesetting"
 XSERVER = "xserver-xorg \
            xf86-input-evdev \
            ${XSERVER_DRIVER}"
-
-PACKAGE_EXCLUDE_COMPLEMENTARY = ".*"
 
 PREFERRED_PROVIDER_virtual/egl ?= "mesa"
 PREFERRED_PROVIDER_virtual/libgles1 ?= "mesa"
@@ -70,16 +63,9 @@ MACHINE_FEATURES = " \
                  vfat \
 "
 
-ROOT_HOME ?= "/root"
-
 # Add the ability to specify _imx machines
 MACHINEOVERRIDES =. "imx:"
-
-VIRTUAL-RUNTIME_base-utils-hwclock = "util-linux-hwclock"
 
 # Default baseboard name
 TXBASE_mx6 ?= "mb7"
 TXBASE_mx6ul ?= "evalkit"
-
-inherit rootfs-postprocess
-ROOTFS_POSTPROCESS_COMMAND_remove = "rootfs_update_timestamp; "
