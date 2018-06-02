@@ -30,10 +30,10 @@ PREFERRED_PROVIDER_virtual/kernel ??= "linux-karo"
 PREFERRED_VERSION_linux-karo ?= "4.14.24"
 KERNEL_IMAGETYPE = "uImage"
 
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS = " \
+MACHINE_EXTRA_RDEPENDS = " \
                  linux-firmware-imx-sdma-imx6q \
 "
-MACHINE_ESSENTIAL_EXTRA_RDEPENDS_append_karo-x11 = " \
+MACHINE_EXTRA_RDEPENDS_append_karo-x11 = " \
                  linux-firmware-imx-vpu \
 "
 
