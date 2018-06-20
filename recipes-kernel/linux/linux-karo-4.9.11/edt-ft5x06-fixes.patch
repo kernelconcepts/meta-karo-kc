@@ -1,0 +1,95 @@
+From aa3d4409b664813ceb86a24bd09458cdd29cbb8a Mon Sep 17 00:00:00 2001
+From: Martin Kepplinger <martin.kepplinger@ginzinger.com>
+Date: Mon, 22 May 2017 17:19:45 -0700
+Subject: [PATCH] Input: edt-ft5x06 - increase allowed data range for threshold
+ parameter
+
+The datasheet and application note does not mention an allowed range for
+the M09_REGISTER_THRESHOLD parameter. One of our customers needs to set
+lower values than 20 and they seem to work just fine on EDT EP0xx0M09 with
+T5x06 touch.
+
+So, lacking a known lower limit, we increase the range for thresholds,
+and set the lower limit to 0. The documentation is updated accordingly.
+
+Signed-off-by: Schoefegger Stefan <stefan.schoefegger@ginzinger.com>
+Signed-off-by: Manfred Schlaegl <manfred.schlaegl@ginzinger.com>
+Signed-off-by: Martin Kepplinger <martin.kepplinger@ginzinger.com>
+Acked-by: Rob Herring <robh@kernel.org>
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+---
+ Documentation/devicetree/bindings/input/touchscreen/edt-ft5x06.txt | 2 +-
+ drivers/input/touchscreen/edt-ft5x06.c                             | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/Documentation/devicetree/bindings/input/touchscreen/edt-ft5x06.txt b/Documentation/devicetree/bindings/input/touchscreen/edt-ft5x06.txt
+index 6db22103e2dd5..025cf8c9324ac 100644
+--- a/Documentation/devicetree/bindings/input/touchscreen/edt-ft5x06.txt
++++ b/Documentation/devicetree/bindings/input/touchscreen/edt-ft5x06.txt
+@@ -36,7 +36,7 @@ Optional properties:
+                 control gpios
+ 
+  - threshold:   allows setting the "click"-threshold in the range
+-                from 20 to 80.
++                from 0 to 80.
+ 
+  - gain:        allows setting the sensitivity in the range from 0 to
+                 31. Note that lower values indicate higher
+diff --git a/drivers/input/touchscreen/edt-ft5x06.c b/drivers/input/touchscreen/edt-ft5x06.c
+index 8cf8d8d5d4ef4..f872817e81e46 100644
+--- a/drivers/input/touchscreen/edt-ft5x06.c
++++ b/drivers/input/touchscreen/edt-ft5x06.c
+@@ -471,7 +471,7 @@ static EDT_ATTR(gain, S_IWUSR | S_IRUGO, WORK_REGISTER_GAIN,
+ static EDT_ATTR(offset, S_IWUSR | S_IRUGO, WORK_REGISTER_OFFSET,
+ 		M09_REGISTER_OFFSET, 0, 31);
+ static EDT_ATTR(threshold, S_IWUSR | S_IRUGO, WORK_REGISTER_THRESHOLD,
+-		M09_REGISTER_THRESHOLD, 20, 80);
++		M09_REGISTER_THRESHOLD, 0, 80);
+ static EDT_ATTR(report_rate, S_IWUSR | S_IRUGO, WORK_REGISTER_REPORT_RATE,
+ 		NO_REGISTER, 3, 14);
+ 
+From 47014752829ed1b52fa6f876b381774ae530503c Mon Sep 17 00:00:00 2001
+From: Luca Ceresoli <luca@lucaceresoli.net>
+Date: Thu, 7 Sep 2017 14:28:28 -0700
+Subject: [PATCH] Input: edt-ft5x06 - fix access to non-existing register
+
+reg_addr->reg_report_rate is supposed to exist in M06, not M09.
+
+The driver is written to skip avoids access to non-existing registers
+when the register address is NO_REGISTER (0xff). But
+reg_addr->reg_report_rate is initialized to 0x00 by devm_kzalloc() (in
+edt_ft5x06_ts_probe()) and not changed thereafter. So the checks do
+not work and an access to register 0x00 is done.
+
+Fix by setting reg_addr->reg_report_rate to NO_REGISTER.
+
+Also fix the only place where reg_report_rate is checked against zero
+instead of NO_REGISTER.
+
+Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
+Signed-off-by: Dmitry Torokhov <dmitry.torokhov@gmail.com>
+---
+ drivers/input/touchscreen/edt-ft5x06.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/input/touchscreen/edt-ft5x06.c b/drivers/input/touchscreen/edt-ft5x06.c
+index f872817e81e46..5bf63f76dddac 100644
+--- a/drivers/input/touchscreen/edt-ft5x06.c
++++ b/drivers/input/touchscreen/edt-ft5x06.c
+@@ -593,7 +593,7 @@ static int edt_ft5x06_work_mode(struct edt_ft5x06_ts_data *tsdata)
+ 				  tsdata->gain);
+ 	edt_ft5x06_register_write(tsdata, reg_addr->reg_offset,
+ 				  tsdata->offset);
+-	if (reg_addr->reg_report_rate)
++	if (reg_addr->reg_report_rate != NO_REGISTER)
+ 		edt_ft5x06_register_write(tsdata, reg_addr->reg_report_rate,
+ 				  tsdata->report_rate);
+ 
+@@ -874,6 +874,7 @@ edt_ft5x06_ts_set_regs(struct edt_ft5x06_ts_data *tsdata)
+ 
+ 	case M09:
+ 		reg_addr->reg_threshold = M09_REGISTER_THRESHOLD;
++		reg_addr->reg_report_rate = NO_REGISTER;
+ 		reg_addr->reg_gain = M09_REGISTER_GAIN;
+ 		reg_addr->reg_offset = M09_REGISTER_OFFSET;
+ 		reg_addr->reg_num_x = M09_REGISTER_NUM_X;
