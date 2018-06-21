@@ -53,3 +53,10 @@ MACHINE_FEATURES ?= " \
 
 # Add the ability to specify _imx machines
 MACHINEOVERRIDES =. "imx:"
+
+
+# Default baseboard name
+TXBASE_DEFAULT_mx6 ?= "mb7"
+TXBASE_DEFAULT_mx6ul ?= "evalkit"
+
+TXBASE ?= "${TXBASE_DEFAULT}"
