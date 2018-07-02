@@ -69,3 +69,5 @@ MACHINEOVERRIDES =. "imx:"
 # Default baseboard name
 TXBASE_mx6 ?= "mb7"
 TXBASE_mx6ul ?= "evalkit"
+
+include imx-base.inc
