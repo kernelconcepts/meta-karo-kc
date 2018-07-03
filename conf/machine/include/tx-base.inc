@@ -1,6 +1,7 @@
 # Set specific make target and binary suffix
 PREFERRED_PROVIDER_u-boot ??= "u-boot-karo"
 PREFERRED_PROVIDER_virtual/bootloader ??= "u-boot-karo"
+include imx-base.inc
 
 UBOOT_MAKE_TARGET ??= "u-boot.bin"
 UBOOT_SUFFIX ??= "bin"
@@ -70,4 +71,3 @@ MACHINEOVERRIDES =. "imx:"
 TXBASE_mx6 ?= "mb7"
 TXBASE_mx6ul ?= "evalkit"
 
-include imx-base.inc
