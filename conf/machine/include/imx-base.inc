@@ -68,15 +68,15 @@ MACHINE_SOCARCH_FILTER_append_use-mainline-bsp = " \
     virtual/libopenvg virtual/libgles1 virtual/libgles2 virtual/egl virtual/mesa virtual/libgl virtual/libg2d cairo pango \
 "
 
-#INHERIT += "fsl-dynamic-packagearch"
-#
-#SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS_append = " 
-#    imx-gpu-viv->kernel-module-imx-gpu-viv 
-#    libimxvpuapi->imx-vpu 
-#    imx-vpuwrap->imx-vpu 
-#    imx-codec->imx-vpu 
-#    imx-test->imx-vpu 
-#"
+INHERIT += "fsl-dynamic-packagearch"
+
+SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS_append = " \
+    imx-gpu-viv->kernel-module-imx-gpu-viv \
+    libimxvpuapi->imx-vpu \
+    imx-vpuwrap->imx-vpu \
+    imx-codec->imx-vpu \
+    imx-test->imx-vpu \
+"
 
 # Firmware
 MACHINE_FIRMWARE ?= ""
