@@ -13,10 +13,10 @@ UBOOT_ENTRYPOINT_mx6ul = "0x80008000"
 DEFAULTTUNE_mx6 ?= "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-XSERVER_DRIVER = "xf86-video-fbdev"
-XSERVER_DRIVER_mx6 = "xf86-video-modesetting"
-XSERVER = "xserver-xorg \
+PREFERRED_PROVIDER_virtual/xserver ?= "xserver-xorg"
+XSERVER_DRIVER ?= "xf86-video-fbdev"
+XSERVER_DRIVER_mx6 ?= "xf86-video-modesetting"
+XSERVER ?= "xserver-xorg \
            xf86-input-evdev \
            ${XSERVER_DRIVER}"
 
@@ -70,4 +70,3 @@ MACHINEOVERRIDES =. "imx:"
 # Default baseboard name
 TXBASE_mx6 ?= "mb7"
 TXBASE_mx6ul ?= "evalkit"
-
