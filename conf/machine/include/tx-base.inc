@@ -66,8 +66,3 @@ MACHINE_FEATURES = " \
 
 # Add the ability to specify _imx machines
 MACHINEOVERRIDES =. "imx:"
-
-# Default baseboard name
-TXBASE_mx6 ??= "mb7"
-TXBASE_mx6ul ??= "evalkit"
-
