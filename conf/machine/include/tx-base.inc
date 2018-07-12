@@ -45,13 +45,9 @@ MACHINE_EXTRA_RRECOMMENDS = " \
 
 SERIAL_CONSOLES = " \
                 115200;ttymxc0 \
-                115200;ttymxc1 \
-                115200;ttymxc2 \
 "
 SERIAL_CONSOLES_mxs = " \
                 115200;ttyAMA0 \
-                115200;ttyAPP1 \
-                115200;ttyAPP3 \
 "
 
 MACHINE_FEATURES = " \
