@@ -61,3 +61,7 @@ SRC_URI += "file://txbase-${TXBASE}.dtsi;subdir=git/arch/arm/boot/dts"
 SRC_URI += "file://${TXTYPE}-${TXNVM}-${TXBASE}.dts;subdir=git/arch/arm/boot/dts"
 
 KERNEL_DEVICETREE = "${TXTYPE}-${TXNVM}-${TXBASE}.dtb"
+
+# prevent debug module from automatic loading
+KERNEL_MODULE_PROBECONF_mx6 += "evbug"
+module_conf_evbug_mx6 = "blacklist evbug"
