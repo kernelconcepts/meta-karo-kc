@@ -38,11 +38,6 @@ MACHINE_EXTRA_RDEPENDS_append_karo-x11 = " \
                  linux-firmware-imx-vpu \
 "
 
-# Ship kernel modules
-MACHINE_EXTRA_RRECOMMENDS = " \
-                          kernel-modules \
-"
-
 SERIAL_CONSOLES = " \
                 115200;ttymxc0 \
 "
