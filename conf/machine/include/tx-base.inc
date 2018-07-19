@@ -38,12 +38,8 @@ MACHINE_EXTRA_RDEPENDS_append_karo-x11 = " \
                  linux-firmware-imx-vpu \
 "
 
-SERIAL_CONSOLES = " \
-                115200;ttymxc0 \
-"
-SERIAL_CONSOLES_mxs = " \
-                115200;ttyAMA0 \
-"
+SERIAL_CONSOLES = "115200;ttymxc0"
+SERIAL_CONSOLES_mxs = "115200;ttyAMA0"
 
 MACHINE_FEATURES = " \
                  alsa \
