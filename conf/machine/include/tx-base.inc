@@ -41,7 +41,7 @@ MACHINE_EXTRA_RDEPENDS_append_karo-x11 = " \
 SERIAL_CONSOLES = "115200;ttymxc0"
 SERIAL_CONSOLES_mxs = "115200;ttyAMA0"
 
-MACHINE_FEATURES = " \
+MACHINE_FEATURES ?= " \
                  alsa \
                  rtc \
                  serial \
