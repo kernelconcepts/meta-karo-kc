@@ -60,7 +60,7 @@ SRC_URI += "file://txbase-${TXBASE}.dtsi;subdir=git/arch/arm/boot/dts"
 # Add TX6 (machine) specific DTS file(s)
 SRC_URI += "file://${TXTYPE}-${TXNVM}-${TXBASE}.dts;subdir=git/arch/arm/boot/dts"
 
-KERNEL_DEVICETREE = "${TXTYPE}-${TXNVM}-${TXBASE}.dtb"
+KERNEL_DEVICETREE ?= "${TXTYPE}-${TXNVM}-${TXBASE}.dtb"
 
 # prevent debug module from automatic loading
 KERNEL_MODULE_PROBECONF_mx6 += "evbug"
