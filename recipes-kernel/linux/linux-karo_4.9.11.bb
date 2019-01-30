@@ -15,6 +15,7 @@ SRC_URI = "git://source.codeaurora.org/external/imx/linux-imx;protocol=https;bra
            file://edt-ft5x06-fixes.patch \
            file://add-support-for-edt-m12-touch.patch \
            file://ethernet-update-driver.patch \
+           file://give-up-on-gcc-ilog2-constant-optimizations.patch \
            file://defconfig \
 "
 
