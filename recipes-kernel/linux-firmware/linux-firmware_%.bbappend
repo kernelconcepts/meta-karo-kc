@@ -24,6 +24,14 @@ RPROVIDES_${PN}-imx-vpu = "firmware-imx-vpu"
 RREPLACES_${PN}-imx-vpu = "firmware-imx-vpu"
 RCONFLICTS_${PN}-imx-vpu = "firmware-imx-vpu"
 
+RPROVIDES_${PN}-imx-vpu += "firmware-imx-vpu-imx6d"
+RREPLACES_${PN}-imx-vpu += "firmware-imx-vpu-imx6d"
+RCONFLICTS_${PN}-imx-vpu += "firmware-imx-vpu-imx6d"
+
+RPROVIDES_${PN}-imx-vpu += "firmware-imx-vpu-imx6q"
+RREPLACES_${PN}-imx-vpu += "firmware-imx-vpu-imx6q"
+RCONFLICTS_${PN}-imx-vpu += "firmware-imx-vpu-imx6q"
+
 FILES_${PN}-imx-vpu-license = "${nonarch_base_libdir}/firmware/LICENSE.vpu_firmware"
 
 RDEPENDS_${PN}-imx-vpu += "${PN}-imx-vpu-license"
