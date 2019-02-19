@@ -1,0 +1,30 @@
+diff --git a/drivers/net/ethernet/freescale/fec_main.c b/drivers/net/ethernet/freescale/fec_main.c
+index 41a31f2..c062438 100644
+--- a/drivers/net/ethernet/freescale/fec_main.c
++++ b/drivers/net/ethernet/freescale/fec_main.c
+@@ -1875,6 +1875,8 @@ static int fec_enet_mdio_write(struct mii_bus *bus, int mii_id, int regnum,
+ 	return ret;
+ }
+ 
++static int fec_reset_phy(struct platform_device *pdev);
++
+ static int fec_enet_clk_enable(struct net_device *ndev, bool enable)
+ {
+ 	struct fec_enet_private *fep = netdev_priv(ndev);
+@@ -1885,6 +1887,7 @@ static int fec_enet_clk_enable(struct net_device *ndev, bool enable)
+ 			ret = clk_prepare_enable(fep->clk_enet_out);
+ 			if (ret)
+ 				return ret;
++			fec_reset_phy(fep->pdev);
+ 		}
+ 		if (fep->clk_ptp) {
+ 			mutex_lock(&fep->ptp_clk_mutex);
+@@ -3367,6 +3370,8 @@ static int fec_reset_phy(struct platform_device *pdev)
+ 
+ 	gpio_set_value_cansleep(phy_reset, !active_high);
+ 
++	devm_gpio_free(&pdev->dev, phy_reset);
++
+ 	return 0;
+ }
+ #else /* CONFIG_OF */
