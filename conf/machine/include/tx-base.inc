@@ -28,7 +28,6 @@ PREFERRED_PROVIDER_virtual/libg2d_mx6 ?= "mesa"
 PREFERRED_PROVIDER_virtual/libg2d_mx6ul ?= ""
 
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-karo"
-PREFERRED_VERSION_linux-karo ?= "4.14.24"
 KERNEL_IMAGETYPE = "uImage"
 
 SERIAL_CONSOLES = "115200;ttymxc0"
