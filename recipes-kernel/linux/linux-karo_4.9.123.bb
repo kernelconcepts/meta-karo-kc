@@ -66,3 +66,7 @@ KERNEL_DEVICETREE ?= "${TXTYPE}-${TXNVM}-${TXBASE}.dtb"
 # prevent debug module from automatic loading
 KERNEL_MODULE_PROBECONF_mx6 += "evbug"
 module_conf_evbug_mx6 = "blacklist evbug"
+
+# prefer for imx bsp
+DEFAULT_PREFERENCE = "1"
+DEFAULT_PREFERENCE_use-mainline-bsp = "-1"

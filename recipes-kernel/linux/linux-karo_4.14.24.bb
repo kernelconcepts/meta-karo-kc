@@ -116,3 +116,7 @@ do_install_append () {
         install -v -m 0644 "${src}" "${D}${FW_PATH}/$subdir"
     done
 }
+
+# prefer for mainline bsp
+DEFAULT_PREFERENCE = "-1"
+DEFAULT_PREFERENCE_use-mainline-bsp = "1"
