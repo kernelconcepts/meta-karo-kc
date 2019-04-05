@@ -13,25 +13,12 @@ UBOOT_ENTRYPOINT_mx6ul = "0x80008000"
 DEFAULTTUNE_mx6 ?= "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
-PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-XSERVER_DRIVER = "xf86-video-fbdev"
-XSERVER_DRIVER_mx6 = "xf86-video-modesetting"
-XSERVER = "xserver-xorg \
+XSERVER ?= "xserver-xorg \
            xf86-input-evdev \
            ${XSERVER_DRIVER}"
 
-PREFERRED_PROVIDER_virtual/egl ?= "mesa"
-PREFERRED_PROVIDER_virtual/libgles1 ?= "mesa"
-PREFERRED_PROVIDER_virtual/libgles2 ?= "mesa"
-PREFERRED_PROVIDER_virtual/libgl ?= "mesa"
-PREFERRED_PROVIDER_virtual/libg2d_mx6 ?= "mesa"
-PREFERRED_PROVIDER_virtual/libg2d_mx6ul ?= ""
-
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-karo"
-KERNEL_IMAGETYPE = "uImage"
-
-SERIAL_CONSOLES = "115200;ttymxc0"
-SERIAL_CONSOLES_mxs = "115200;ttyAMA0"
+KERNEL_IMAGETYPE ?= "uImage"
 
 MACHINE_FEATURES ?= " \
                  alsa \
