@@ -23,13 +23,10 @@ do_configure_append() {
     cp ${S}/include/linux/compiler-gcc5.h ${S}/include/linux/compiler-gcc7.h 
 }
 
-python check_sanity_everybuild_append () {
-    if d.getVar('UBOOT_MACHINE') != None and d.getVar('IMAGE_BASENAME') != 'u-boot-karo':
-        status.addresult("Error: cannot build %s in build dir that has been configured for 'u-boot' build only" % d.getVar('IMAGE_BASENAME'), d)
-
-    elif d.getVar('IMAGE_BASENAME') == 'karo-image-x11' and d.getVar('DISTRO') != 'karo-x11':
-        status.addresult("Error: cannot build '%s' with DISTRO '%s'" % \
-           (d.getVar('IMAGE_BASENAME'), d.getVar('DISTRO')))
-    else
-        bb.error("Ka-Ro sanity check passed")
+# enable Hush shell per default
+do_configure_prepend () {
+	cfgfile=$( echo ${UBOOT_MACHINE} | sed 's/_config/_defconfig/g' )
+	echo CFGFIILE $cfgfile
+	echo "CONFIG_HUSH_PARSER=y" >> ${S}/configs/${cfgfile}
+	echo "CONFIG_SYS_HUSH_PARSER=y" >> ${S}/configs/${cfgfile}
 }
