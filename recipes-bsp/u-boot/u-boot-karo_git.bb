@@ -18,6 +18,11 @@ PACKAGE_ARCH = "${MACHINE_ARCH}"
 
 COMPATIBLE_MACHINE  = "(tx6[qsu]-.*|txul-.*|imx6.*-tx.*)"
 
+do_configure_append() {
+    cp ${S}/include/linux/compiler-gcc5.h ${S}/include/linux/compiler-gcc6.h 
+    cp ${S}/include/linux/compiler-gcc5.h ${S}/include/linux/compiler-gcc7.h 
+}
+
 python check_sanity_everybuild_append () {
     if d.getVar('UBOOT_MACHINE') != None and d.getVar('IMAGE_BASENAME') != 'u-boot-karo':
         status.addresult("Error: cannot build %s in build dir that has been configured for 'u-boot' build only" % d.getVar('IMAGE_BASENAME'), d)
