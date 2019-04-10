@@ -4,13 +4,17 @@ DESCRIPTION = "Das U-Boot for Ka-Ro electronics TX Computer-On-Modules."
 LICENSE = "GPLv2+"
 LIC_FILES_CHKSUM = "file://Licenses/README;md5=0507cd7da8e7ad6d6701926ec9b84c95"
 
-#PROVIDES = "u-boot"
-
 PV = "v2015.10-rc2+git${SRCPV}"
 
-SRCREV = "KARO-TX6-2018-01-08"
+SRCREV = "63652ce377ee8ce60a6217aefe238313d0989c60"
 SRCBRANCH = "master"
-SRC_URI = "git://github.com/karo-electronics/karo-tx-uboot.git;branch=${SRCBRANCH}"
+
+SRC_URI = "git://github.com/karo-electronics/karo-tx-uboot.git;branch=${SRCBRANCH} \
+           file://mx6-soc-l2en.patch \
+           file://mx6-clock-div.patch \
+           file://0001-Disable-Werror-for-default-build-useless-for-all-oth.patch \
+           file://0001-u-boot-merge-u-boot-use-packed-structure-for-net.patch \
+"
 
 S = "${WORKDIR}/git"
 
