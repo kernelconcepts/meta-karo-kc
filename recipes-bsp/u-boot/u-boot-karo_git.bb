@@ -25,6 +25,7 @@ COMPATIBLE_MACHINE  = "(tx6[qsu]-.*|txul-.*|imx6.*-tx.*)"
 do_configure_append() {
     cp ${S}/include/linux/compiler-gcc5.h ${S}/include/linux/compiler-gcc6.h 
     cp ${S}/include/linux/compiler-gcc5.h ${S}/include/linux/compiler-gcc7.h 
+    cp ${S}/include/linux/compiler-gcc5.h ${S}/include/linux/compiler-gcc8.h 
 }
 
 # enable Hush shell per default
