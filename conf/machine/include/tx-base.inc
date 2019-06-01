@@ -8,6 +8,10 @@ UBOOT_SUFFIX ??= "bin"
 
 UBOOT_ENTRYPOINT_mx6  = "0x10008000"
 UBOOT_ENTRYPOINT_mx6ul = "0x80008000"
+# since the lines above break mainline for mx6 we add this default
+# but it leaves us to set a correct entrypoint for txul machines
+# using mainline bsp
+UBOOT_ENTRYPOINT_use-mainline-bsp = "0x10008000"
 
 # 'cortexa9-neon' 'cortexa9hf-neon'
 DEFAULTTUNE_mx6 ?= "cortexa9hf-neon"
