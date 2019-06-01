@@ -12,9 +12,9 @@ with a few limitations.
 
 = Device status
 
-|TX Module |	Baseboard |		Status |
-|----------|--------------|--------------------|
-|TX6U-8033 |  STK 5v5     | tested,ok          |
-|TX6U-8033 |  Aclavis     | experimental       |
-|TX6Q-8037 |  Aclavis     | experimental       |
-|TX6Q-8137 |  Aclavis LVDS| experimental       |
+| TX Module |	Baseboard   |		Status    |
+| --------- | ------------- | ------------------- |
+| TX6U-8033 |  STK 5v5      | tested,ok           |
+| TX6U-8033 |  Aclavis      | experimental        |
+| TX6Q-8037 |  Aclavis      | experimental        |
+| TX6Q-8137 |  Aclavis LVDS | experimental        |
