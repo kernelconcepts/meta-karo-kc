@@ -44,6 +44,6 @@
 	status = "disabled";
 };
 
-&backlight {
+&backlight0 {
 	status = "okay";
 };
