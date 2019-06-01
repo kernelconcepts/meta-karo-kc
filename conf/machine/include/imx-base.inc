@@ -9,7 +9,7 @@ XSERVER_DRIVER ??= "xf86-video-fbdev"
 XSERVER_DRIVER_imxgpu2d ??= "xf86-video-imx-vivante"
 XSERVER_DRIVER_vf ??= "xf86-video-modesetting"
 XSERVER_DRIVER_use-mainline-bsp ??= "xf86-video-armada"
-XSERVER ??= "xserver-xorg \
+XSERVER ?= "xserver-xorg \
            xf86-input-evdev \
            ${XSERVER_DRIVER}"
 
@@ -222,4 +222,3 @@ MACHINE_FEATURES ?= "usbgadget usbhost vfat alsa touchscreen"
 MACHINEOVERRIDES =. "imx:"
 
 HOSTTOOLS_NONFATAL_append_mx8x = " sha384sum"
-
