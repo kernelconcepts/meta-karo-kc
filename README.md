@@ -1,16 +1,16 @@
-= Ka-Ro device BSP layer
+# Ka-Ro device BSP layer
 
 This is a subset of the meta-karo BSP layer by Ka-Ro Electronics. It targets
 on providing a thin Ka-Ro device support to regular Yocto builds. Its not an
 official Ka-Ro product - its modified by kernel concepts. For questions or 
 support inquiries about it please do contact info@kernelconcepts.de.
 
-= Yocto status
+## Yocto status
 
 This layer should be compatible with most recent Yocto layer (sumo, thud...) 
 with a few limitations.
 
-= Device status
+## Device status
 
 | TX Module |	Baseboard   |		Status    |
 | --------- | ------------- | ------------------- |
