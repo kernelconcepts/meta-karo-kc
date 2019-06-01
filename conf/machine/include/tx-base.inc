@@ -13,10 +13,6 @@ UBOOT_ENTRYPOINT_mx6ul = "0x80008000"
 DEFAULTTUNE_mx6 ?= "cortexa9hf-neon"
 DEFAULTTUNE_mx6ul ?= "cortexa7hf-neon"
 
-XSERVER ?= "xserver-xorg \
-           xf86-input-evdev \
-           ${XSERVER_DRIVER}"
-
 PREFERRED_PROVIDER_virtual/kernel ??= "linux-karo"
 KERNEL_IMAGETYPE ?= "uImage"
 
