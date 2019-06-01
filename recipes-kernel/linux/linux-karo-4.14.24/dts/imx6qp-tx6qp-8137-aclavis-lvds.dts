@@ -14,7 +14,7 @@
  */
 
 /dts-v1/;
-#include "imx6qp-tx6qp-8037.dts"
+#include "imx6qp-tx6qp-8137.dts"
 #include "imx6qdl-tx6-lvds.dtsi"
 
 / {
