@@ -1,0 +1,49 @@
+/*
+ * Copyright 2019 ./kernel concepts <florian@kernelconcepts.de>
+ *
+ *
+ * This file is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * version 2 as published by the Free Software Foundation.
+ * 
+ * This file is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ */
+
+/dts-v1/;
+#include "imx6qp-tx6qp-8037.dts"
+#include "imx6qdl-tx6-lcd.dtsi"
+
+/ {
+	model = "Ka-Ro electronics TX6Q-8037 Module on Glyn Aclavis baseboard";
+
+	lcd-panel {
+		compatible = "edt,etm0700g0dh6";
+		bus-format-override = "rgb24";
+		pixelclk-active = <1>;
+	};
+
+	/delete-node/ sound;
+};
+
+&can1 {
+	status = "okay";
+};
+
+&can2 {
+	status = "disabled";
+};
+
+&i2c2 {
+};
+
+&sgtl5000 {
+	status = "disabled";
+};
+
+&backlight {
+	status = "okay";
+};
