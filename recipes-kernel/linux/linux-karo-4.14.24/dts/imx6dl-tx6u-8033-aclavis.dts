@@ -21,7 +21,7 @@
 	model = "Ka-Ro electronics TX6U-8033 Module on Glyn Aclavis baseboard";
 
 	lcd-panel {
-		compatible = "edt,etm0700g0dh6";
+		compatible = "edt,etm0700g0edh6";
 		bus-format-override = "rgb24";
 		pixelclk-active = <1>;
 	};
