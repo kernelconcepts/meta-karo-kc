@@ -253,6 +253,22 @@ TX_LCD {
 			pixelclk-active = <0>;
 		};
 
+		ET070001DM6 {
+			clock-frequency = <33264000>;
+			hactive = <800>;
+			vactive = <480>;
+			hback-porch = <88>;
+			hsync-len = <128>;
+			hfront-porch = <40>;
+			vback-porch = <33>;
+			vsync-len = <2>;
+			vfront-porch = <10>;
+			hsync-active = <0>;
+			vsync-active = <0>;
+			de-active = <1>;
+			pixelclk-active = <1>;
+		};
+
 		ETQ570 {
 			clock-frequency = <6596040>;
 			hactive = <320>;
