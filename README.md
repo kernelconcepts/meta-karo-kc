@@ -18,3 +18,4 @@ with a few limitations.
 | TX6U-8033 |  Aclavis      | experimental        |
 | TX6Q-8037 |  Aclavis      | experimental        |
 | TX6Q-8137 |  Aclavis LVDS | experimental        |
+| TX8M-1610 |  MIPI-MB      | experimental        |
