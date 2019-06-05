@@ -7,7 +7,7 @@ i.MX Family Reference Boards. It includes support for many IPs such as GPU, VPU 
 LICENSE = "GPLv2"
 LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
 
-inherit kernel kernel-yocto kernel-localversion
+inherit kernel kernel-localversion
 
 # Put a local version until we have a true SRCREV to point to
 LOCALVERSION ?= ""
