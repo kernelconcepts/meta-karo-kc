@@ -20,3 +20,7 @@ do_configure_prepend () {
 
 MACHINE_USES_VIVANTE_KERNEL_DRIVER_MODULE = "1"
 
+# prevent debug module from automatic loading
+KERNEL_MODULE_PROBECONF += "evbug"
+module_conf_evbug = "blacklist evbug"
+
