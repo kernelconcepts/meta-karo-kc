@@ -1,0 +1,141 @@
+/*
+ * Copyright 2019 ./kernel concepts <florian@kernelconcepts.de>
+ *
+ *
+ * This file is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * version 2 as published by the Free Software Foundation.
+ * 
+ * This file is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ */
+
+/dts-v1/;
+#include "imx6dl-tx6u-8133.dts"
+#include "imx6qdl-tx6-lvds.dtsi"
+
+/ {
+	model = "Ka-Ro electronics TX6U-8033 Module on Glyn Aclavis baseboard";
+
+	lvds0_panel: lvds0-panel {
+		compatible = "hannstar,hsd100pxn1";
+		backlight = <&backlight0>;
+		power-supply = <&reg_lcd0_pwr>;
+		enable-gpios = <&gpio2 19 GPIO_ACTIVE_HIGH>; // TX Pin 154
+
+		port {
+			panel_in_lvds0: endpoint {
+				remote-endpoint = <&lvds0_out>;
+			};
+		};
+	};
+
+	leds {
+		compatible = "gpio-leds";
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_gpio_leds>;
+
+		user_led: user {
+			label = "Heartbeat";
+			gpios = <&gpio2 20 GPIO_ACTIVE_HIGH>; // TX Pin 153
+			linux,default-trigger = "heartbeat";
+		};
+	};
+
+	regulators {
+		reg_lcd0_pwr: regulator-lcd0-power {
+			compatible = "regulator-fixed";
+			regulator-name = "LCD0 RESET";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&pinctrl_lcd0_pwr>;
+			gpio = <&gpio3 29 GPIO_ACTIVE_HIGH>; // TX Pin 150
+			enable-active-high;
+			regulator-boot-on;
+			regulator-always-on;
+		};
+	};
+
+	/delete-node/ sound;
+};
+
+&uart1 {
+	status = "okay";
+};
+
+&uart2 {
+	status = "okay";
+	dma-names = "","";
+	/delete-property/ uart-has-rtscts;
+	/delete-property/ fsl,uart-has-rtscts;
+};
+
+&uart3 {
+	status = "okay";
+	dma-names = "","";
+
+//    /* RS485 */
+    linux,rs485-enabled-at-boot-time;
+//    rs485-rts-delay = <0 0>;
+	rs485-rts-active-high; // unused, future kernel			 
+	fsl,uart-has-rtscts;	
+	uart-has-rtscts;	
+};
+
+&can1 {
+	status = "okay";
+};
+
+&can2 {
+	status = "disabled";
+};
+
+&i2c2 {
+};
+
+&i2c3 {
+	status = "okay";
+
+	ds1339: rtc@68 {
+		compatible = "dallas,ds1339";
+		reg = <0x68>;
+	};
+};
+
+&sgtl5000 {
+	status = "disabled";
+};
+
+&backlight0 {
+	status = "okay";
+};
+
+&iomuxc {
+	pinctrl_hog: hoggrp {
+		fsl,pins = <
+			MX6QDL_PAD_NANDF_CS2__GPIO6_IO15    0x1b0b0 /* Pin 148: OPTO IN */
+			MX6QDL_PAD_EIM_A16__GPIO2_IO22      0x1b0b0	/* Pin 149: OPTO IN */
+			MX6QDL_PAD_EIM_EB3__GPIO2_IO31      0x1b0b0 /* Pin 151: OPTO OUT */
+			MX6QDL_PAD_EIM_A17__GPIO2_IO21      0x1b0b0 /* Pin 152: OPTO OUT */
+			MX6QDL_PAD_EIM_A19__GPIO2_IO19      0x1b0b0 /* Pin 154: Backlight enable */
+			MX6QDL_PAD_EIM_DA6__GPIO3_IO06      0x1b0b0 /* Pin 190: for debugging */
+		>;
+	};
+
+	pinctrl_gpio_leds: gpioledsgrp {
+		fsl,pins = <
+			MX6QDL_PAD_EIM_A18__GPIO2_IO20      0x1b0b0 /* Pin 153: LED Heartbeat */
+		>;
+	};
+
+	pinctrl_lcd0_pwr: lcd0-pwrgrp {
+		fsl,pins = <
+			MX6QDL_PAD_EIM_D29__GPIO3_IO29      0x1b0b0 /* Pin 150: LCD Reset */
+		>;
+	};	
+	
+};
