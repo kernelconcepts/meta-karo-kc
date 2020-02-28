@@ -15,50 +15,34 @@
 
 /dts-v1/;
 #include "imx6dl-tx6u-8133.dts"
-#include "imx6qdl-tx6-lvds.dtsi"
 
 / {
-	model = "Ka-Ro electronics TX6U-8033 Module on Glyn Aclavis baseboard";
+	model = "Ka-Ro electronics TX6U-8133 Module on Glyn Aclavis LVDS baseboard";
 
-	lvds0_panel: lvds0-panel {
-		compatible = "hannstar,hsd100pxn1";
-		backlight = <&backlight0>;
+	backlight0 {
+		pwms = <&pwm2 0 500000 0>;
+		turn-on-delay-ms = <35>;
 		power-supply = <&reg_lcd0_pwr>;
+	};
+
+	backlight1: backlight1 {
+	    pwms = <&pwm1 0 500000 0>;
+	    turn-on-delay-ms = <35>;
+		power-supply = <&reg_lcd0_pwr>;
+	};
+
+	lvds0-panel {
+		compatible = "hannstar,hsd100pxn1";
+		bus-format-override = "spwg-24";
+		pixelclk-active = <0>;
 		enable-gpios = <&gpio2 19 GPIO_ACTIVE_HIGH>; // TX Pin 154
-
-		port {
-			panel_in_lvds0: endpoint {
-				remote-endpoint = <&lvds0_out>;
-			};
-		};
 	};
-
-	leds {
-		compatible = "gpio-leds";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pinctrl_gpio_leds>;
-
-		user_led: user {
-			label = "Heartbeat";
-			gpios = <&gpio2 20 GPIO_ACTIVE_HIGH>; // TX Pin 153
-			linux,default-trigger = "heartbeat";
-		};
-	};
-
-	regulators {
-		reg_lcd0_pwr: regulator-lcd0-power {
-			compatible = "regulator-fixed";
-			regulator-name = "LCD0 RESET";
-			regulator-min-microvolt = <3300000>;
-			regulator-max-microvolt = <3300000>;
-			pinctrl-names = "default";
-			pinctrl-0 = <&pinctrl_lcd0_pwr>;
-			gpio = <&gpio3 29 GPIO_ACTIVE_HIGH>; // TX Pin 150
-			enable-active-high;
-			regulator-boot-on;
-			regulator-always-on;
-		};
-	};
+	
+	lvds1-panel {
+		compatible = "hannstar,hsd100pxn1";
+		bus-format-override = "spwg-24";
+		pixelclk-active = <0>;
+	};	
 
 	/delete-node/ sound;
 };
@@ -94,24 +78,16 @@
 	status = "disabled";
 };
 
-&i2c2 {
-};
-
 &i2c3 {
-	status = "okay";
-
-	ds1339: rtc@68 {
-		compatible = "dallas,ds1339";
-		reg = <0x68>;
-	};
+    /delete-node/ edt-ft5x06@38;
 };
 
 &sgtl5000 {
 	status = "disabled";
 };
 
-&backlight0 {
-	status = "okay";
+&reg_lcd1_pwr {
+	status = "disabled";
 };
 
 &iomuxc {
@@ -125,17 +101,4 @@
 			MX6QDL_PAD_EIM_DA6__GPIO3_IO06      0x1b0b0 /* Pin 190: for debugging */
 		>;
 	};
-
-	pinctrl_gpio_leds: gpioledsgrp {
-		fsl,pins = <
-			MX6QDL_PAD_EIM_A18__GPIO2_IO20      0x1b0b0 /* Pin 153: LED Heartbeat */
-		>;
-	};
-
-	pinctrl_lcd0_pwr: lcd0-pwrgrp {
-		fsl,pins = <
-			MX6QDL_PAD_EIM_D29__GPIO3_IO29      0x1b0b0 /* Pin 150: LCD Reset */
-		>;
-	};	
-	
 };
