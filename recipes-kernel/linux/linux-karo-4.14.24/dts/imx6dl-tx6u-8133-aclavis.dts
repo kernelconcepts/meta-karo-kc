@@ -32,20 +32,31 @@
 	};
 
 	lvds0-panel {
-		compatible = "hannstar,hsd100pxn1";
+		compatible = "avic,tm070ddh03";
 		bus-format-override = "spwg-24";
 		pixelclk-active = <0>;
 		enable-gpios = <&gpio2 19 GPIO_ACTIVE_HIGH>; // TX Pin 154
 	};
 	
 	lvds1-panel {
-		compatible = "hannstar,hsd100pxn1";
+		compatible = "avic,tm070ddh03";
 		bus-format-override = "spwg-24";
 		pixelclk-active = <0>;
 	};	
 
 	/delete-node/ sound;
 };
+
+&ldb {
+	lvds0: lvds-channel@0 {
+		status = "okay";
+	};
+
+	lvds1: lvds-channel@1 {
+		status = "disabled";
+	};
+};
+
 
 &uart1 {
 	status = "okay";
