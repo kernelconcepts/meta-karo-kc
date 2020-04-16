@@ -10,6 +10,8 @@ require recipes-kernel/linux/linux-imx.inc
 inherit fsl-vivante-kernel-driver-handler
 
 SRC_URI = "git://source.codeaurora.org/external/imx/linux-imx;protocol=https;branch=${SRCBRANCH} \
+           file://0001-compiler-attributes-add-support-for-copy-gcc-9.patch \
+           file://0002-include-linux-module.h-copy-init-exit-attrs-to-.patch \
            file://set-enet_ref_clk-to-50-mhz.patch \
            file://edt-ft5x06-make-distinction-between.patch \
            file://edt-ft5x06-fixes.patch \
