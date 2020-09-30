@@ -46,3 +46,11 @@ PREFERRED_PROVIDER_ptpd = "ptpd"
 
 # Use correct VPU
 PREFERRED_PROVIDER_virtual/imxvpu = "imx-vpu-hantro"
+
+PREFERRED_PROVIDER_u-boot = "u-boot-imx"
+PREFERRED_PROVIDER_u-boot-fw-utils = "u-boot-fw-utils-imx"
+PREFERRED_PROVIDER_u-boot-tools = "u-boot-tools-imx"
+
+PREFERRED_VERSION_u-boot-imx = "2018.03"
+PREFERRED_VERSION_u-boot-fw-utils-imx = "2018.03"
+PREFERRED_VERSION_u-boot-tools-imx = "2018.03"
