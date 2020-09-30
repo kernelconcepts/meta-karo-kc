@@ -1,4 +1,16 @@
-# switching to older u-boot - new one needs a lot work
+# Copyright (C) 2013-2016 Freescale Semiconductor
+# Copyright 2017-2018 NXP
+
+inherit pythonnative
+
+DEPENDS_append = " python dtc-native"
+
+LICENSE = "GPLv2+"
+LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+
+UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
+SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
+
 SRCBRANCH = "imx_v2018.03_4.14.98_2.3.0"
 SRCREV = "672f25d3c83c65bfbef3fc4ae3333f86cebd9b23"
 
@@ -41,3 +53,16 @@ SRC_URI_append = " \
 	file://0034-karo-qs8m-change-U-Boot-prompt-to-QS8M.patch \
 	file://0035-net-phy-ksz9031-add-workaround-for-1000baseT-chip-er.patch \
 "
+
+S = "${WORKDIR}/git"
+
+inherit fsl-u-boot-localversion
+
+LOCALVERSION ?= "-${SRCBRANCH}"
+
+PACKAGE_ARCH = "${MACHINE_ARCH}"
+COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
+
+UBOOT_NAME_mx6 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME_mx7 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
+UBOOT_NAME_mx8 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
