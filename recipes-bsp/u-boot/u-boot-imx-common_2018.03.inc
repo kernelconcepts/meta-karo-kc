@@ -1,6 +1,7 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
 
+require recipes-bsp/u-boot/u-boot.inc
 inherit pythonnative
 
 DEPENDS_append = " python dtc-native"
