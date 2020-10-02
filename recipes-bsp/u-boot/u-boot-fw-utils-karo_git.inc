@@ -1,1 +1,1 @@
-require u-boot-fw-utils-common_git.inc
+require u-boot-fw-utils-common.inc
