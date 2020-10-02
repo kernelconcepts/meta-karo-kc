@@ -49,6 +49,8 @@ PREFERRED_PROVIDER_virtual/imxvpu = "imx-vpu-hantro"
 
 PREFERRED_PROVIDER_u-boot = "u-boot-imx"
 PREFERRED_PROVIDER_u-boot-fw-utils = "u-boot-fw-utils-imx"
+PREFERRED_RPROVIDER_u-boot-fw-utils = "u-boot-fw-utils-imx"
+PREFERRED_RPROVIDER_u-boot-tools = "u-boot-tools-imx"
 PREFERRED_PROVIDER_u-boot-tools = "u-boot-tools-imx"
 
 PREFERRED_VERSION_u-boot-imx = "2018.03"
