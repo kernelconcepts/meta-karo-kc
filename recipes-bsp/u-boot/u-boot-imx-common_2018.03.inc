@@ -1,13 +1,7 @@
 # Copyright (C) 2013-2016 Freescale Semiconductor
 # Copyright 2017-2018 NXP
 
-require recipes-bsp/u-boot/u-boot.inc
-inherit pythonnative
-
-DEPENDS_append = " python dtc-native"
-
-LICENSE = "GPLv2+"
-LIC_FILES_CHKSUM = "file://Licenses/gpl-2.0.txt;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+require u-boot-common.inc
 
 UBOOT_SRC ?= "git://source.codeaurora.org/external/imx/uboot-imx.git;protocol=https"
 SRC_URI = "${UBOOT_SRC};branch=${SRCBRANCH}"
@@ -55,13 +49,6 @@ SRC_URI_append = " \
 	file://0035-net-phy-ksz9031-add-workaround-for-1000baseT-chip-er.patch \
 "
 
-S = "${WORKDIR}/git"
-
-inherit fsl-u-boot-localversion
-
-LOCALVERSION ?= "-${SRCBRANCH}"
-
-PACKAGE_ARCH = "${MACHINE_ARCH}"
 COMPATIBLE_MACHINE = "(mx6|mx7|mx8)"
 
 UBOOT_NAME_mx6 = "u-boot-${MACHINE}.bin-${UBOOT_CONFIG}"
