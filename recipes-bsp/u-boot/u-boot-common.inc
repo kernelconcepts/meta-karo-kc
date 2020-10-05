@@ -1,4 +1,5 @@
 require recipes-bsp/u-boot/u-boot.inc
+require u-boot-env.inc
 inherit pythonnative
 
 DEPENDS_append = " python dtc-native"
