@@ -1,3 +1,4 @@
+require recipes-bsp/u-boot/u-boot.inc
 DESCRIPTION = "i.MX U-Boot suppporting i.MX reference boards."
 PROVIDES += "u-boot"
 RPROVIDES_${PN} += "u-boot"
