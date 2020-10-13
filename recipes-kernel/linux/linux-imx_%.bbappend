@@ -5,6 +5,7 @@ SUMMARY = "Appended NXP i.MX Kernel for support of Ka-Ro electronics TX CoM fami
 FILESEXTRAPATHS_prepend := "${THISDIR}/linux-imx-karo-5.4/patches:${THISDIR}/linux-imx-karo-5.4:${THISDIR}/linux-karo:"
 SRC_URI_append = "\
 	file://bootlogo.png \
+	file://0001-MLK-11483-1-make-the-kernel-image-for-mfgtool.patch \
 	file://0001-TI-SN65DSI83-bridge-driver-support.patch \
 	file://0002-Little-fixes-for-imx-drm-drivers.patch \
 	file://0003-Add-RaspberryPi-7inch-touchscreen-display-support-dr.patch \
