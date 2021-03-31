@@ -10,19 +10,20 @@
 #include <dt-bindings/input/input.h>
 
 / {
-	model = "Ka-Ro electronics QS8M-MQ00 (NXP i.MX8MM) Module";
+	model = "Ka-Ro electronics QS8M-MQ00 (NXP i.MX8MM) module";
 	compatible = "karo,imx8mm-qs8m", "fsl,imx8mm";
 
 	aliases {
-		usb-host = &usbotg2;
-		usbotg = &usbotg1;
 		i2c0 = &i2c1;
 		i2c1 = &i2c2;
 		i2c2 = &i2c3;
+		mmc0 = &usdhc1;
+		mmc1 = &usdhc2;
+		usb-host = &usbotg2;
+		usbotg = &usbotg1;
 	};
 
 	chosen {
-		bootargs = "console=ttymxc0,115200 earlycon=ec_imx6q,0x30860000,115200";
 		stdout-path = &uart1;
 	};
 
@@ -68,27 +69,43 @@
 	status = "okay";
 };
 
+&i2c1 {
+	pinctrl-names = "default", "gpio";
+	pinctrl-0 = <&pinctrl_i2c1>;
+	pinctrl-1 = <&pinctrl_i2c1_gpio>;
+	scl-gpios = <&gpio5 14 GPIO_ACTIVE_HIGH>;
+	sda-gpios = <&gpio5 15 GPIO_ACTIVE_HIGH>;
+	clock-frequency = <400000>;
+	status = "okay";
+};
+
 &i2c2 {
 	pinctrl-names = "default", "gpio";
 	pinctrl-0 = <&pinctrl_i2c2>;
 	pinctrl-1 = <&pinctrl_i2c2_gpio>;
+	scl-gpios = <&gpio5 16 GPIO_ACTIVE_HIGH>;
+	sda-gpios = <&gpio5 17 GPIO_ACTIVE_HIGH>;
 	clock-frequency = <400000>;
 	status = "okay";
 };
 
 &i2c3 {
-	clock-frequency = <400000>;
 	pinctrl-names = "default", "gpio";
 	pinctrl-0 = <&pinctrl_i2c3>;
 	pinctrl-1 = <&pinctrl_i2c3_gpio>;
+	scl-gpios = <&gpio5 18 GPIO_ACTIVE_HIGH>;
+	sda-gpios = <&gpio5 19 GPIO_ACTIVE_HIGH>;
+	clock-frequency = <400000>;
 	status = "okay";
 };
 
 &i2c4 {
-	clock-frequency = <400000>;
 	pinctrl-names = "default", "gpio";
 	pinctrl-0 = <&pinctrl_i2c4>;
 	pinctrl-1 = <&pinctrl_i2c4_gpio>;
+	scl-gpios = <&gpio5 20 GPIO_ACTIVE_HIGH>;
+	sda-gpios = <&gpio5 21 GPIO_ACTIVE_HIGH>;
+	clock-frequency = <400000>;
 	status = "okay";
 };
 
@@ -112,7 +129,7 @@
 };
 
 &usbotg1 {
-	dr_mode = "device";
+	dr_mode = "peripheral";
 	status = "okay";
 };
 
@@ -125,7 +142,6 @@
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc1>;
 	bus-width = <8>;
-	no-1-8-v;
 	non-removable;
 	status = "okay";
 };
@@ -137,18 +153,6 @@
 	pinctrl-2 = <&pinctrl_usdhc2_200mhz &pinctrl_usdhc2_cd>;
 	bus-width = <4>;
 	cd-gpios = <&gpio2 12 GPIO_ACTIVE_LOW>;
-	no-1-8-v;
-	fsl,wp-controller;
-	status = "okay";
-};
-
-&usdhc3 {
-	pinctrl-names = "default", "state_100mhz", "state_200mhz";
-	pinctrl-0 = <&pinctrl_usdhc3 &pinctrl_usdhc3_cd>;
-	pinctrl-1 = <&pinctrl_usdhc3_100mhz &pinctrl_usdhc3_cd>;
-	pinctrl-2 = <&pinctrl_usdhc3_200mhz &pinctrl_usdhc3_cd>;
-	bus-width = <4>;
-	cd-gpios = <&gpio3 8 GPIO_ACTIVE_LOW>;
 	no-1-8-v;
 	fsl,wp-controller;
 	status = "okay";
@@ -276,13 +280,6 @@
 		>;
 	};
 
-	pinctrl_uart3_rtscts: uart3-rtsctsgrp {
-		fsl,pins = <
-			MX8MM_IOMUXC_ECSPI1_SS0_UART3_DCE_RTS_B		0x140
-			MX8MM_IOMUXC_ECSPI1_MISO_UART3_DCE_CTS_B	0x140
-		>;
-	};
-
 	pinctrl_usdhc1: usdhc1grp {
 		fsl,pins = <
 			MX8MM_IOMUXC_SD1_CLK_USDHC1_CLK			0x190
@@ -336,49 +333,6 @@
 	pinctrl_usdhc2_cd: usdhc2-cdgrp {
 		fsl,pins = <
 			MX8MM_IOMUXC_SD2_CD_B_GPIO2_IO12		0x1c0
-		>;
-	};
-
-	pinctrl_usdhc3: usdhc3grp {
-		fsl,pins = <
-			/*
-			 * Erratum e11341: SION must be asserted on NAND_WE_B
-			 * when used as SDHC3_CLK
-			 */
-			MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK		0x40000190
-			MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d0
-			MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d0
-			MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d0
-			MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d0
-			MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d0
-		>;
-	};
-
-	pinctrl_usdhc3_100mhz: usdhc3grp100mhz {
-		fsl,pins = <
-			MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK		0x40000194
-			MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d4
-			MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d4
-			MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d4
-			MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d4
-			MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d4
-		>;
-	};
-
-	pinctrl_usdhc3_200mhz: usdhc3grp200mhz {
-		fsl,pins = <
-			MX8MM_IOMUXC_NAND_WE_B_USDHC3_CLK		0x40000196
-			MX8MM_IOMUXC_NAND_WP_B_USDHC3_CMD		0x1d6
-			MX8MM_IOMUXC_NAND_DATA04_USDHC3_DATA0		0x1d6
-			MX8MM_IOMUXC_NAND_DATA05_USDHC3_DATA1		0x1d6
-			MX8MM_IOMUXC_NAND_DATA06_USDHC3_DATA2		0x1d6
-			MX8MM_IOMUXC_NAND_DATA07_USDHC3_DATA3		0x1d6
-		>;
-	};
-
-	pinctrl_usdhc3_cd: usdhc3-cdgrp {
-		fsl,pins = <
-			MX8MM_IOMUXC_NAND_DATA02_GPIO3_IO8		0x1c0
 		>;
 	};
 };

@@ -31,9 +31,8 @@
 	};
 
 	clocks {
-		audio_clk: clock@6 {
+		audio_clk: audio-clk {
 			compatible = "fixed-clock";
-			reg = <6>;
 			#clock-cells = <0>;
 			clock-frequency = <26000000>;
 		};
@@ -51,7 +50,7 @@
 		};
 	};
 
-        mcp_clock: mcp-clock {
+	mcp_clock: mcp-clock {
 		compatible = "fixed-clock";
 		#clock-cells = <0>;
 		clock-frequency = <16000000>;
@@ -131,7 +130,7 @@
 		reg = <0x6f>;
 	};
 
-        dsi_lvds_bridge: sn65dsi84@2c {
+	dsi_lvds_bridge: sn65dsi84@2c {
 		compatible = "ti,sn65dsi83";
 		reg = <0x2c>;
 		ti,dsi-lanes = <4>;
@@ -196,7 +195,7 @@
 &mipi_dsi {
 	status = "okay";
 
-        port@1 {
+	port@1 {
 		mipi_dsi_out: endpoint {
 			remote-endpoint = <&dsi_lvds_bridge_in>;
 			attach-bridge;
@@ -239,11 +238,11 @@
 		>;
 	};
 
-        pinctrl_lcd_en: lcd-engrp {
-                fsl,pins = <
-                        MX8MN_IOMUXC_GPIO1_IO04_GPIO1_IO4		0x146
-                >;
-        };
+	pinctrl_lcd_en: lcd-engrp {
+		fsl,pins = <
+			MX8MN_IOMUXC_GPIO1_IO04_GPIO1_IO4		0x146
+		>;
+	};
 
 	pinctrl_lvds: lvdsgrp {
 		fsl,pins = <

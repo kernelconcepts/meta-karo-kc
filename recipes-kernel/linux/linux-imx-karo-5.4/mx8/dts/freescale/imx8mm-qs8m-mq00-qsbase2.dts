@@ -9,7 +9,7 @@
 #include "imx8mm-qs8m-mq00.dts"
 
 / {
-	model = "Ka-Ro electronics QS8M-MQ00 (NXP i.MX8MM) Module on QSBASE2 baseboard";
+	model = "Ka-Ro electronics QS8M-MQ00 (NXP i.MX8MM) module on QSBASE2 baseboard";
 };
 
 &fec1 {
