@@ -35,6 +35,7 @@ UBOOT_SUFFIX = "bin"
 UBOOT_MAKE_TARGET = ""
 
 PREFERRED_VERSION_linux-karo ?= "5.4"
+PREFERRED_VERSION_linux-imx ?= "5.4"
 
 IMAGE_FSTYPES_append = " ext4"
 
