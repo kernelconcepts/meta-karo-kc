@@ -1,5 +1,5 @@
 require u-boot-env.inc
-inherit pythonnative
+inherit python3native
 
 DEPENDS_append = " python dtc-native"
 
