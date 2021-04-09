@@ -1,1 +1,0 @@
-linux-karo_%.bbappend

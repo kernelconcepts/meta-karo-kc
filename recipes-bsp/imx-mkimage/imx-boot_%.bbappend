@@ -1,10 +1,15 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/mkimage:"
 SRC_URI_append = " \
-		file://0001-iMX8M-soc.mak-fix-missing-dependencies.patch \
-		file://0002-iMX8M-soc.mak-add-support-for-TX8M.patch \
+		file://imx8qxb0-bugfixes.patch \
+		file://mkimage-fit-atf-bugfixes.patch \
+		file://make-clean-bugfix.patch \
+		file://make-dependencies.patch \
+		file://tx8m-support.patch \
+		file://cleanup.patch \
+		file://no-tee.patch \
 "
 
 do_compile_prepend() {
-    export dtbs_ddr3l=imx8mm-tx8m-1610.dtb
+    export dtbs=${UBOOT_DTB_NAME}
+    export dtbs_ddr3l=${UBOOT_DTB_NAME}
 }
-
