@@ -1,0 +1,32 @@
+// SPDX-License-Identifier: GPL-2.0 OR BSD-3-Clause
+/*
+ * Copyright (C) 2020 Lothar Waßmann <LW@KARO-electronics.de>
+ */
+
+#include "stm32mp15-karo-mb7.dtsi"
+
+/ {
+	/delete-node/ sound;
+};
+
+&polytouch {
+	interrupt-parent = <&gpiod>;
+	interrupts = <12 IRQ_TYPE_EDGE_FALLING>;
+	/delete-property/ reset-gpios;
+	/delete-property/ wake-gpios;
+};
+
+&rtc_i2c {
+	status = "disabled";
+};
+
+&sgtl5000 {
+	status = "disabled";
+};
+
+&uart4_pins {
+	pins1 {
+		/delete-property/ bias-disable;
+		bias-pull-up;
+	};
+};
