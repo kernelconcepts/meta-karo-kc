@@ -18,7 +18,7 @@ SRCBRANCH_mx6 = "master"
 SRCREV_mx6 = "c0b7b18e33d4fc17af2544de50816d539412d6e0"
 
 SRCBRANCH_stm32mp1 = "karo-txmp"
-SRCREV_stm32mp1 = "c644626a97f960491fe27f2aba683cae7b4b82b8"
+SRCREV_stm32mp1 = "99c107845d260cdc019232d4f07e8dfa13c7ff90"
 
 S = "${WORKDIR}/git"
 

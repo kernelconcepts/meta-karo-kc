@@ -7,41 +7,6 @@
 	/delete-node/ sound;
 };
 
-&dsi {
-	#address-cells = <1>;
-	#size-cells = <0>;
-
-	status = "disabled";
-
-	ports {
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		port@0 {
-			reg = <0>;
-			dsi_in: endpoint {
-				remote-endpoint = <&ltdc_ep1_out>;
-			};
-		};
-	};
-};
-
-&ltdc {
-	status = "disabled";
-
-	ports {
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		port@0 {
-			reg = <0>;			
-			ltdc_ep1_out: endpoint@0 {
-				remote-endpoint = <&dsi_in>;
-			};
-		};
-	};
-};
-
 &sdmmc1 {
 	status = "disabled";
 };
